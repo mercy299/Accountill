@@ -3,11 +3,10 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY client/package.json .
-COPY client/yarn.lock .
-RUN yarn install --production
+COPY ./package.json .
+RUN npm install --production
 
-COPY client .
+COPY . .
 
 RUN npm run build
 
@@ -17,7 +16,7 @@ ENV NODE_ENV production
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
-COPY ./client/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
