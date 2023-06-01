@@ -2,12 +2,12 @@ version: '3.1'
 services:
   client:
     container_name: client
-    image: client-prod
+    image: accountill-client
     build:
       dockerfile: ./client/Dockerfile
       target: production
     ports:
-      - '80:80'
+      - '3000:80'
     depends_on:
       - server
       - mongo
@@ -16,7 +16,7 @@ services:
       - mongo
   server:
     container_name: server
-    image: server-prod
+    image: accountill-server
     build:
       dockerfile: ./server/Dockerfile
     ports:
